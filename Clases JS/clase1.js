@@ -11,8 +11,8 @@
 }
  let result = console.log(perimetroCirculo(1))
   let result2 = console.log(perimetroCirculo(3))
-   let result3 = console.log(perimetroCirculo(10))
+   let result3 = console.log(perimetroCirculo(10)) */
 
 
 
-   console.log("++++++++++++++++++++++++++++++++++++++++") */
+   
