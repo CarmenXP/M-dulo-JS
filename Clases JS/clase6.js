@@ -30,7 +30,7 @@
 
   Ejemplos: "JavaScript", Haskell, "Scala", Elixir (Erlang)
 */
-
+/*
 function suma(a, b) {
     return a + b;
   }
@@ -224,6 +224,217 @@ function suma(a, b) {
       }
     }, {});
   
-  console.log(resultado);
+  console.log(resultado); 
 
   
+
+  //Programación funcional
+
+  /*
+  Call Stack
+
+  Es una pila que contiene el historial
+  de las funciones que se van ejecutando
+  durante el código.
+*/
+
+function recursiva() {
+  recursiva();
+}
+
+/* 
+  Call Stack (Tiene un límite de tamaño)
+
+ERROR: Stack Overflow
+recursiva()
+.
+.
+.
+recursiva()
+recursiva()
+recursiva()
+recursiva()
+recursiva()
+--------------------------------------
+*/
+
+// Stack Overflow
+//recursiva();
+
+function f1() {
+  f2();
+}
+
+function f2() {
+  f3();
+}
+
+function f3() {
+  console.log("Ejecutando f3");
+}
+
+//f1();
+
+/* 
+  Call Stack (Tiene un límite de tamaño)
+
+log()
+f3()
+f2()
+f1()
+--------------------------------------
+*/
+
+// Ejercicio: Crear una función que calcule el
+// factorial de un número recursivamente.
+
+// n! = n * (n-1) * (n-2) * (n-3) * ... * 1
+// 3! = 3 * 2 * 1
+
+function factorial_imperativo(n) {
+  var total = 1;
+  for (let i = 1; i <= n; i++) {
+    total = total * i;
+  }
+  return total;
+}
+
+//                               vvv Default Functions Params
+function factorial_recursivo(n, total = 1) {
+  if (n <= 1) {
+    return total;
+  } else {
+    total *= n;
+    return factorial_recursivo(n - 1, total);
+  }
+}
+
+function factorial_recursivo_mejorado(n) {
+  if (n <= 1) {
+    return 1;
+  } else {
+    return n * factorial_recursivo_mejorado(n - 1);
+  }
+}
+
+// Por 1 punto: ¿ Cómo utilizar "memoization" ?
+
+console.log(factorial_recursivo(5));
+console.log(factorial_recursivo_mejorado(5));
+
+console.log(factorial_imperativo(5));
+
+// Ejercicio: Crear una función que calcule fibonacci
+
+// fibo(1) = 1
+// fibo(2) = 1
+// fibo(n) = fibo(n-1) + fibo(n-2)
+
+// 1 1 2 3 5 8 13 21 34 55 89 ...
+// fibo(10) = 55
+
+// Por 1 punto: Hacer la versión imperativa de fibonacci
+function fibo_imperativo(num) {
+  // num = 1;
+  let res_01;
+  for (let i = 0; i <= num; i++) {}
+
+  return res_01;
+}
+
+console.log("fibo imperativo", fibo_imperativo(10));
+
+function fibo_recursivo(num, acc = [1, 1, 0]) {
+  if (acc[0] === num) return acc.reverse();
+  acc.unshift(acc[0] + acc[1]);
+  return fibo_recursivo(num, acc);
+}
+
+console.log(fibo_recursivo(1597));
+
+function fibonaciRecursivo(n) {
+  if (n < 3) {
+    return 1;
+  } else {
+    return fibonaciRecursivo(n - 2) + fibonaciRecursivo(n - 1);
+  }
+}
+
+// fibonaciRecursivo(5) = 2 + 3 = 5
+console.log(fibonaciRecursivo(10));
+
+/*
+  Execution Context
+
+  Es el bloque de memoría por función
+  que "recuerda" las variables que tiene
+  para que pueda accesar a ellas más adelante.
+*/
+
+/*
+  Gargabe Collector
+
+  Se encarga de limpiar de la memoria
+  aquellas variables/funciones que ya no
+  se utilizan.
+
+  Cuando una función termina de ejecutarse
+  TODAS LAS VARIABLES (del Execution Context) 
+  son borradas
+  por el Gargabe Collector
+*/
+
+function factorial(n) {
+  for (let i = 1; i <= n; i++) {
+    total *= i;
+  }
+
+  return total;
+}
+
+let total = 1;
+//console.log(factorial(10));
+
+let nombre = "Jorge";
+
+function f1() {
+  function f2() {
+    let nombre = "Dulce";
+
+    function f3() {
+      console.log("f3", nombre); // Dulce
+    }
+
+    f3();
+  }
+
+  f2();
+
+  console.log("f1", nombre); // Jorge
+}
+
+f1();
+
+/*
+  Closure
+
+  Es la posibilidad de mantener en memoria
+  variables que no le pertenecen a la función.
+*/
+function closure() {
+  let x = 0;
+
+  return function () {
+    x++;
+    return x;
+  };
+}
+
+const f = closure(); // <---- Ya no debería existir x
+console.log(f());
+console.log(f());
+console.log(f());
+console.log(f());
+
+// ....
+
