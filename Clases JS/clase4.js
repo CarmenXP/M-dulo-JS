@@ -68,4 +68,40 @@ Crear una función que sume todos los elementos de un array
  // }
 //
  // console.log(include(arr, 3))
- 
+ /*
+  Arreglos:
+
+  [  "a",   "b",    "c",   "d",    "x",    "y"   ]
+      0      1       2      3       4       5
+  
+  longitud de arreglo = 6
+
+  La última posición de un arreglo
+  de tamaño N es N - 1
+
+  Los arreglos son un bloque completo de memoria.
+*/
+
+function array_sum(panchito) {
+  let result = 0;
+
+  for (let i = 0; i < panchito.length; i++) {
+    result += panchito[i];
+  }
+
+  return result;
+}
+
+function array_sum_v2(algo) {
+  let result = 0;
+  let panchito = [1, 5, 6, 8, 5, 3, 6, 0];
+
+  for (let i = 0; i < panchito.length; i++) {
+    result += panchito[i] * algo;
+  }
+
+  return result;
+}
+
+console.log(array_sum([1, 2, 3, 4, 5, 6]));
+console.log(array_sum_v2(10));
